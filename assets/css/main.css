@@ -1,0 +1,52 @@
+html, body {
+		display: block;
+		position: relative;
+		margin: 0px;
+		padding: 0px;
+	}
+	html {
+		height: 100%;
+	}
+	body {
+		width: 800px;
+		margin-left: auto;
+		margin-right: auto;
+		box-shadow: 0px 0px 10px 0px black;
+		min-height: 100%;
+		padding: 20px 10px;
+	}
+	p {
+		margin: 0px;
+	}
+
+	body *:not(#panel, #panel *):hover {
+		outline: 1px dashed black;
+	}
+
+	#panel {
+		position: absolute;
+		right: -200px;
+		top: 0px;
+		width: 200px;
+		height: 600px;
+		border: 1px solid gray;
+		box-sizing: border-box;
+		background: white;
+	}
+
+	.currentTag {
+		outline: 1px dashed red!important;
+	}
+	.currentTag > * {
+		outline: 1px solid skyblue!important;
+	}
+
+	.htmleditor {
+		display: block;
+		box-shadow: 0px 0px 10px 0px black;
+		min-height: 200px;
+		min-width: 400px;
+		border: 2px solid skyblue;
+		border-radius: 10px;
+		padding: 10px;
+	}
