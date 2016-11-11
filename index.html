@@ -1,123 +1,16 @@
 <!DOCTYPE html>
 <html><head>
-	<meta charset="utf-8"/>
-	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<style>
-	html, body {
-		display: block;
-		position: relative;
-		margin: 0px;
-		padding: 0px;
-	}
-	html {
-		height: 100%;
-	}
-	body {
-		width: 800px;
-		margin-left: auto;
-		margin-right: auto;
-		box-shadow: 0px 0px 10px 0px black;
-		min-height: 100%;
-		padding: 20px 10px;
-	}
-	p {
-		margin: 0px;
-	}
-
-	body *:not(#panel, #panel *):hover {
-		outline: 1px dashed black;
-	}
-
-	#panel {
-		position: absolute;
-		right: -200px;
-		top: 0px;
-		width: 200px;
-		height: 600px;
-		border: 1px solid gray;
-		box-sizing: border-box;
-		background: white;
-	}
-
-	.currentTag {
-		outline: 1px dashed red!important;
-	}
-	.currentTag > * {
-		outline: 1px solid skyblue!important;
-	}
-	</style>
-	<script>
-	var currentTag = null;
-
-	function removeCurrentTag() {
-		if (currentTag != null) {
-			currentTag.removeClass('currentTag');
-			currentTag[0].contentEditable = false;
-		}
-	}
-
-	function showTagOnPanel(tag) {
-		var panel = $('#panel')
-		panel.empty();
-		panel.append('<h3>' + tag[0].tagName + '</h3>');
-		panel.append('<div>' + tag[0].getClientRects() +  '</div>');
-
-		console.log(tag[0]);
-		console.log(tag[0].className);
-		console.log(tag[0].classList);
-
-	}
-
-	function showClasses() {
-		var sSheetList = document.styleSheets;
-		for (var sSheet = 0; sSheet < sSheetList.length; sSheet++)
-		{
-			var sheet = sSheetList[sSheet];
-			var ruleList = sheet.cssRules;
-			// console.log(sheet);
-			if (sheet.href != null) {
-				console.log('external stylesheet: ' + sheet.href);
-				continue;
-			}
-			for (var rule = 0; rule < ruleList.length; rule ++)
-			{
-			   console.log( ruleList[rule].selectorText );
-			}
-		}
-	}
-
-	$(document).ready(function() {
-		showClasses();
-
-		$(document.body).append('<div id="panel"></div>');
-
-		$(document).on('click', 'body:not(#panel, #panel *)', function(event) {
-			if ($(this).is('body, #panel, #panel *')) {
-				// проверить event target
-			}
-			removeCurrentTag();
-		});
-		$(document.body).on('click', '*:not(#panel, #panel *)', function(event) {
-			console.log('tag click');
-			removeCurrentTag();
-
-			currentTag = $(this);
-			currentTag.addClass('currentTag');
-
-			currentTag[0].contentEditable = true;
-			currentTag[0].focus();
-
-			showTagOnPanel(currentTag);
-
-			event.preventDefault();
-			return false;
-		});
-	});
-	
-	</script>
+	<script src="/assets/js/vendor/jquery.js"></script>
+	<script src="/assets/js/vendor/angular.js"></script>
+	<script src="/assets/js/main.js"></script>
+	<link rel="stylesheet" href="/assets/css/main.css" type="text/css" media="all"/>
 </head>
 <body>
-	<p>Кусок <span class="testClass">какого-то</span> текста</p>
+	<div id="panel"></div>
+
+	<div class="htmleditor">
+		<p>Кусок <span>какого-то</span> текста</p>
+	</div>
+
 </body>
 </html>
