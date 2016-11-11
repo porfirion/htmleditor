@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html><head>
+	<meta charset="utf-8"/>
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<style>
 	html, body {
 		display: block;
@@ -57,12 +59,39 @@
 
 	function showTagOnPanel(tag) {
 		var panel = $('#panel')
+		panel.empty();
 		panel.append('<h3>' + tag[0].tagName + '</h3>');
 		panel.append('<div>' + tag[0].getClientRects() +  '</div>');
+
+		console.log(tag[0]);
+		console.log(tag[0].className);
+		console.log(tag[0].classList);
+
+	}
+
+	function showClasses() {
+		var sSheetList = document.styleSheets;
+		for (var sSheet = 0; sSheet < sSheetList.length; sSheet++)
+		{
+			var sheet = sSheetList[sSheet];
+			var ruleList = sheet.cssRules;
+			// console.log(sheet);
+			if (sheet.href != null) {
+				console.log('external stylesheet: ' + sheet.href);
+				continue;
+			}
+			for (var rule = 0; rule < ruleList.length; rule ++)
+			{
+			   console.log( ruleList[rule].selectorText );
+			}
+		}
 	}
 
 	$(document).ready(function() {
-		console.log('hello!');
+		showClasses();
+
+		$(document.body).append('<div id="panel"></div>');
+
 		$(document).on('click', 'body:not(#panel, #panel *)', function(event) {
 			if ($(this).is('body, #panel, #panel *')) {
 				// проверить event target
@@ -89,9 +118,6 @@
 	</script>
 </head>
 <body>
-	<div id="panel"></div>
-
-	<p>Кусок <span>какого-то</span> текста</p>
-
+	<p>Кусок <span class="testClass">какого-то</span> текста</p>
 </body>
 </html>
